@@ -1,6 +1,7 @@
 package main.java.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -11,6 +12,7 @@ public class Supermarket {
 		this.code = code;
 		this.products = new ArrayList<Product>();
 		this.orders = new ArrayList<Order>();
+		this.orderQueue = new LinkedList<Order>();	//a�adido
 	}
 	
 	private String name;
@@ -145,40 +147,70 @@ public class Supermarket {
 	//Cola de pedidos
 	public void pushOrder(Order order) {
 		//TODO Añadir pedido
+		orderQueue.add(order);
 		
 	}
 	
 	public Order popOrder() {
 		//TODO Obtener pedido
-		
-		return null;
+		return orderQueue.poll();
 	}
 	
 	public Order getFront() {
 		//TODO Devuelve el primer pedido de la cola
 		//OJO!! No hay que sacarlo, solo devolver el primer pedido
-		
-		return null;
+		return orderQueue.element();
 	}
 	
 	//Operaciones
-	public void getMinPriceProduct() {
+	public Product getMinPriceProduct() {
 		//TODO Devolver el producto con el precio más bajo
-		
+		double minimo = Double.POSITIVE_INFINITY;
+		Product productoMin = null;
+		for(int i = 0; i < this.getProducts().size(); i ++){
+			if (this.getProduct(i).getPrice() < minimo ){
+				minimo = this.getProduct(i).getPrice();
+				productoMin = this.getProduct(i);
+			}
+		}
+		return productoMin;
 	}
 	
-	public void getMaxPriceProduct() {
+	public Product getMaxPriceProduct() {
 		//TODO Devolver el producto con el precio más alto
+		double maximo = Double.NEGATIVE_INFINITY;
+		Product productoMax = null;
+		for(int i = 0; i < this.getProducts().size(); i ++){
+			if (this.getProduct(i).getPrice() > maximo ){
+				maximo = this.getProduct(i).getPrice();
+				productoMax = this.getProduct(i);
+			}
+		}
+		return productoMax;
 		
 	}
 	
-	public void getAvgPriceProduct() {
+	public double getAvgPriceProduct() {
 		//TODO Devolver la media de precios de los productos
-		
+		double avg = 0;
+		double sum = 0;
+		for(int i = 0; i < this.getProducts().size(); i ++){
+			sum += this.getProduct(i).getPrice();
+		}
+		avg = sum / (this.getProducts().size());
+
+		return avg;
 	}
 	
-	public void getPriceByCode(Integer productCode) {
+	public double getPriceByCode(Integer productCode) {
 		//TODO Delvover el precio del producto
+		double precio = 0.0;
+		for(int i = 0; i < this.getProducts().size(); i ++){
+			if (this.getProduct(i).getCode().equals(productCode)){
+				precio = this.getProduct(i).getPrice();
+			}
+		}
+	return precio;
 	}
 	
 	public void getBestSellingProduct() {

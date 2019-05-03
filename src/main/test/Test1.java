@@ -22,21 +22,21 @@ public class Test1 {
 		OrderLine ol1 = new OrderLine(CodeUtils.getOrderLineCode(), 2, o1, p2);
 		OrderLine ol2 = new OrderLine(CodeUtils.getOrderLineCode(), 1, o1, p4);
 		
-//		o1.addOrderLine(ol1);
-//		o1.addOrderLine(ol2);
-//		
-//		s1.addOrder(o1);
-//	
-//		s1.addProduct(p1);
-//		s1.addProduct(p2);
-//		s1.addProduct(p3);
-//		s1.addProduct(p4);
-//		
-//
-//		
-//		System.out.println(s1.getOrder(0));
-//		
-//		System.out.println(s1.getProduct(0));
+		o1.addOrderLine(ol1);
+		o1.addOrderLine(ol2);
+
+		s1.addOrder(o1);
+
+		s1.addProduct(p1);
+		s1.addProduct(p2);
+		s1.addProduct(p3);
+		s1.addProduct(p4);
+
+
+
+		System.out.println(s1.getOrder(0));
+
+		System.out.println(s1.getProduct(0));
 		
 		//SEGUNDA PARTE
 		o1.getOrderLines().add(ol1);

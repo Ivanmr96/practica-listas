@@ -145,8 +145,11 @@ public class Order {
 	//TERCERA PARTE
 	public Double getTotalPrice() {
 		//TODO Calcular el total del pedido
-		
-		return 0.0;
+		double totalPrice = 0.0;
+		for (int i = 0; i < this.getOrderLines().size(); i ++){
+			totalPrice += this.getOrderLine(i).getProduct().getPrice() * this.getOrderLine(i).getQuantity();
+		}
+		return totalPrice;
 	}
 
 }
