@@ -213,14 +213,76 @@ public class Supermarket {
 	return precio;
 	}
 	
-	public void getBestSellingProduct() {
-		//TODO Devolver el producto más vendido junto con el número de ventas
+	/* INTERFAZ
+	 * Comentario: Devuelve el producto m�s vendido del supermercado
+	 * Prototipo: public Product getBestSellingProduct() 
+	 * Entrada: No hay
+	 * Precondiciones: No hay
+	 * Salida: un Product con el producto m�s vendido
+	 * Postcondiciones: Asociado al nombre devuelve un Product con el producto mas vendido, o null si no hay ningun producto vendido
+	 */
+	public Product getBestSellingProduct() 
+	{
+		Product bestSellingProduct = new Product(0, " ", 0.0, null);
 		
+		for(Product product:products)
+		{
+			if(this.getQuantitySold(product.getCode()) > this.getQuantitySold(bestSellingProduct.getCode()))
+			{
+				bestSellingProduct = product;
+			}
+		}
+		
+		return bestSellingProduct;
 	}
 	
-	public void getWorstSellingProduct() {
-		//TODO Devolver el producto más vendido junto con el número de ventas
+	/*INTERFAZ
+	 * Comentario: Devuelve la cantidad vendida del producto indicado:
+	 * Prototipo: public int getQuantitySold(int code)
+	 * Entrada: Un int con la ID del producto del que se desea saber la cantidad vendida
+	 * Precondiciones: No hay
+	 * Salida: Un int con la cantidad vendida del producto
+	 * Postcondiciones: Asociado al nombre devuelve un int con la cantidad vendida en el supermercado del producto determinado.
+	 */
+	public int getQuantitySold(int code)
+	{
+		int quantitySold = 0;
 		
+		for(Order pedido:orders)
+		{
+			for(OrderLine lineaPedidos:pedido.getOrderLines())
+			{
+				if(lineaPedidos.getProduct().getCode() == code)
+				{
+					quantitySold += lineaPedidos.getQuantity();
+				}
+			}
+		}
+		
+		return quantitySold;
+	}
+	
+	/* INTERFAZ
+	 * Comentario: Devuelve el producto menos vendido del supermercado
+	 * Prototipo: public Product getWorstSellingProduct() 
+	 * Entrada: No hay
+	 * Precondiciones: No hay
+	 * Salida: un Product con el producto menos vendido
+	 * Postcondiciones: Asociado al nombre devuelve un Product con el producto menos vendido, o null si no hay ningun producto vendido
+	 */
+	public Product getWorstSellingProduct() 
+	{
+		Product worstSellingProduct = this.getProduct(0);
+		
+		for(Product product:products)
+		{
+			if(this.getQuantitySold(product.getCode()) < this.getQuantitySold(worstSellingProduct.getCode()))
+			{
+				worstSellingProduct = product;
+			}
+		}
+		
+		return worstSellingProduct;
 	}
 	
 }
